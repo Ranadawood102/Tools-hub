@@ -1,0 +1,215 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff; /* White background */
+  color: #1a1818; /* Black text */
+  line-height: 1.6;
+}
+
+header {
+  background: #1d1c1c; /* Black header */
+  color: #ffffff; /* White text */
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #ffffff; /* White text */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #cccccc; /* Light gray on hover */
+}
+
+/* Hero Section */
+.hero {
+  background: #000000 url('assets/images/backgrounds/hero-bg.jpg') no-repeat center center/cover; /* Black background with image */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 5rem 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(29, 28, 28, 0.5); /* Dark overlay for better text visibility */
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 1.5s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .btn {
+  background: #2e2b2b; /* White button */
+  color: #f7f6f6; /* Black text */
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .btn:hover {
+  background: #302d2d; /* Light gray on hover */
+}
+
+/* Tools Section */
+.tools-section {
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff; /* White background */
+}
+
+.tools-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #131212; /* Black text */
+}
+
+/* Tool Icon Styles */
+.tool-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+  filter: invert(0%); /* Ensure icons are black */
+}
+
+/* Tool Card Styles */
+.tool-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff; /* White background */
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000000; /* Black text */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0; /* Light gray border */
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tool-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Tools Grid Layout */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Ad Unit Section */
+#ad-unit {
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  background: #ffffff; /* White background */
+  border-top: 1px solid #e0e0e0; /* Light gray border */
+  border-bottom: 1px solid #e0e0e0; /* Light gray border */
+}
+
+/* Footer */
+footer {
+  background: #252323; /* Black footer */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .tools-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .tool-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tool-card h3 {
+    font-size: 1rem;
+  }
+}

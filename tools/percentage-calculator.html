@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate percentages, percentage increase/decrease, and more with our easy-to-use Percentage Calculator.">
+  <meta name="keywords" content="percentage calculator, percentage increase, percentage decrease, math tools">
+  <meta name="author" content="Your Name">
+  <title>Percentage Calculator</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .calculator {
+      max-width: 400px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .calculator input, .calculator select, .calculator button {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .calculator button {
+      background: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+    .calculator button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">ToolsHub</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="calculator">
+    <h2>Percentage Calculator</h2>
+    <select id="calculationType">
+      <option value="basic">Calculate Percentage</option>
+      <option value="increase">Percentage Increase</option>
+      <option value="decrease">Percentage Decrease</option>
+      <option value="original">Find Original Value</option>
+    </select>
+
+    <div id="inputFields">
+      <!-- Input fields will be dynamically added here -->
+    </div>
+
+    <button onclick="calculatePercentage()">Calculate</button>
+    <div class="result" id="result"></div>
+  </section>
+
+  <script>
+    const inputFields = document.getElementById("inputFields");
+    const resultDiv = document.getElementById("result");
+
+    // Function to update input fields based on selected calculation type
+    function updateInputFields() {
+      const calculationType = document.getElementById("calculationType").value;
+      let html = "";
+
+      switch (calculationType) {
+        case "basic":
+          html = `
+            <input type="number" id="value1" placeholder="Enter value">
+            <input type="number" id="value2" placeholder="Enter total value">
+          `;
+          break;
+        case "increase":
+        case "decrease":
+          html = `
+            <input type="number" id="originalValue" placeholder="Enter original value">
+            <input type="number" id="newValue" placeholder="Enter new value">
+          `;
+          break;
+        case "original":
+          html = `
+            <input type="number" id="finalValue" placeholder="Enter final value">
+            <input type="number" id="percentage" placeholder="Enter percentage">
+          `;
+          break;
+      }
+
+      inputFields.innerHTML = html;
+    }
+
+    // Function to calculate percentage
+    function calculatePercentage() {
+      const calculationType = document.getElementById("calculationType").value;
+      let result = 0;
+
+      switch (calculationType) {
+        case "basic":
+          const value1 = parseFloat(document.getElementById("value1").value);
+          const value2 = parseFloat(document.getElementById("value2").value);
+          if (value2 === 0) {
+            resultDiv.innerText = "Total value cannot be zero!";
+            return;
+          }
+          result = (value1 / value2) * 100;
+          resultDiv.innerText = `Result: ${result.toFixed(2)}%`;
+          break;
+
+        case "increase":
+        case "decrease":
+          const originalValue = parseFloat(document.getElementById("originalValue").value);
+          const newValue = parseFloat(document.getElementById("newValue").value);
+          if (originalValue === 0) {
+            resultDiv.innerText = "Original value cannot be zero!";
+            return;
+          }
+          result = ((newValue - originalValue) / originalValue) * 100;
+          resultDiv.innerText = `Percentage ${calculationType === "increase" ? "Increase" : "Decrease"}: ${result.toFixed(2)}%`;
+          break;
+
+        case "original":
+          const finalValue = parseFloat(document.getElementById("finalValue").value);
+          const percentage = parseFloat(document.getElementById("percentage").value);
+          if (percentage === 0) {
+            resultDiv.innerText = "Percentage cannot be zero!";
+            return;
+          }
+          result = (finalValue * 100) / (100 + percentage);
+          resultDiv.innerText = `Original Value: ${result.toFixed(2)}`;
+          break;
+      }
+    }
+
+    // Update input fields when the page loads and when the calculation type changes
+    document.getElementById("calculationType").addEventListener("change", updateInputFields);
+    window.onload = updateInputFields;
+  </script>
+</body>
+</html>

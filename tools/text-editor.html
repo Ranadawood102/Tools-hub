@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple and functional online text editor.">
+  <meta name="keywords" content="text editor, online editor, text formatting">
+  <meta name="author" content="Your Name">
+  <title>Text Editor - ToolsHub</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .text-editor {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .toolbar button {
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toolbar button:hover {
+      background: #333333;
+    }
+
+    .toolbar select {
+      padding: 0.5rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .editor {
+      width: 100%;
+      height: 300px;
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      background: #ffffff;
+      color: #000000;
+      resize: vertical;
+    }
+
+    .download-btn {
+      margin-top: 1rem;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #333333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">ToolsHub</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="text-editor">
+    <h2>Text Editor</h2>
+    <div class="toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <select onchange="changeAlignment(this.value)">
+        <option value="left">Align Left</option>
+        <option value="center">Align Center</option>
+        <option value="right">Align Right</option>
+      </select>
+      <select onchange="changeFontSize(this.value)">
+        <option value="1">Small</option>
+        <option value="2">Medium</option>
+        <option value="3">Large</option>
+      </select>
+    </div>
+    <div id="editor" class="editor" contenteditable="true"></div>
+    <button class="download-btn" onclick="downloadText()">Download as .txt</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 ToolsHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Function to apply formatting (bold, italic, underline)
+    function formatText(command) {
+      document.execCommand(command, false, null);
+    }
+
+    // Function to change text alignment
+    function changeAlignment(align) {
+      document.getElementById('editor').style.textAlign = align;
+    }
+
+    // Function to change font size
+    function changeFontSize(size) {
+      document.getElementById('editor').style.fontSize = size + 'rem';
+    }
+
+    // Function to download the text as a .txt file
+    function downloadText() {
+      const text = document.getElementById('editor').innerText;
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'text-editor-content.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
